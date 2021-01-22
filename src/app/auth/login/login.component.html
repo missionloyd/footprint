@@ -1,0 +1,42 @@
+<!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
+<mat-card *ngIf="!isLoading">
+  <mat-card-header>
+    <div mat-card-avatar class="header-image">
+      <img src="../../../assets/images/empty-profile.webp" alt="image" width = '43' height = '43'/>
+    </div>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-subtitle>Secure</mat-card-subtitle>
+  </mat-card-header>
+  <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+    <mat-form-field>
+      <input
+        matInput
+        name="email"
+        ngModel
+        type="email"
+        placeholder="E-Mail"
+        #emailInput="ngModel"
+        required
+        email>
+      <mat-error *ngIf="emailInput.invalid">Please enter a valid email address</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+      matInput
+      name="password"
+      ngModel
+      type="password"
+      placeholder="Password"
+      #passwordInput="ngModel"
+      required>
+      <mat-error *ngIf="passwordInput.invalid">Please enter a strong password.</mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      *ngIf="!isLoading"
+      >Login
+    </button>
+  </form>
+</mat-card>

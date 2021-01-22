@@ -5,22 +5,52 @@
 
 mat-spinner {
   margin: auto;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 mat-paginator {
   margin-top: 1rem;
-  margin-bottom: 1rem;
 }
+
+mat-expansion-panel {
+  margin: auto;
+  margin-bottom: 1rem;
+  max-width:600px;
+}
+
+/* ::ng-deep .mat-paginator-page-size{
+  display: none !important;
+}
+
+::ng-deep .mat-paginator-range-label{
+  display: none !important;
+} */
 
 .info-text {
   text-align: center;
 }
 
-.post-image {
-  width: 100%;
+/* header */
+mat-expansion-panel-header {
+  font-size: large;
+  font-style: italic;
+  /* text-decoration: underline; */
+}
+
+/* content */
+.post-content {
+  margin-top: 12px;
+  font-weight: bold;
 }
 
 .post-image img {
   width: 100%;
+  max-width:600px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
