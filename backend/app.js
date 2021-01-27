@@ -20,6 +20,7 @@ mongoose
 
 //deprecation warning
 mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -1,3 +1,34 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 960px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
+  text-align: center;
+}
+
+.fullscreen-video-wrap {
+  position: fixed;
+  top:10;
+  left:0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.fullscreen-video-wrap video {
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 75%;
+}
+
+.header-content {
+  z-index: 1;
+}
+
 mat-card {
   margin: auto;
   position: fixed;
@@ -22,3 +53,5 @@ mat-spinner {
   margin: none;
   opacity: 80%;
 }
+
+

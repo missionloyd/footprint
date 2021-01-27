@@ -10,6 +10,7 @@ export class AppComponent implements OnInit{
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
+    title: 'frontend'
     this.authService.autoAuthUser();
   }
 }

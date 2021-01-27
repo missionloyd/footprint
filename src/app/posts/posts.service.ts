@@ -24,7 +24,9 @@ export class PostsService {
               title: post.title,
               content: post.content,
               id: post._id,
-              imagePath: post.imagePath
+              imagePath: post.imagePath,
+              latlng: post.latlng,
+              creator: post.creator
             };
           }),
             maxPosts: postData.maxPosts
@@ -32,6 +34,7 @@ export class PostsService {
         })
       )
       .subscribe(transformedPostData => {
+        //console.log(transformedPostData);
         this.posts = transformedPostData.posts;
         this.postsUpdated.next({
           posts: [...this.posts],
@@ -45,16 +48,24 @@ export class PostsService {
   }
 
   getPost(id: string) {
-    return this.http.get<{ _id: string, title: string, content: string, imagePath: string }>(
+    return this.http.get<{
+      _id: string,
+      title: string,
+      content: string,
+      imagePath: string,
+      latlng: [string],
+      creator: string
+    }>(
       "http://localhost:3000/api/posts/" + id
     );
   }
 
-  addPost(title: string, content: string, image: File) {
+  addPost(title: string, content: string, image: File, latlng: [string]) {
     const postData = new FormData();
     postData.append("title", title);
     postData.append("content", content);
     postData.append("image", image, title);
+    postData.append("latlng", latlng.toString());
     this.http
       .post<{ message: string; post: Post }>(
         "http://localhost:3000/api/posts",
@@ -65,7 +76,7 @@ export class PostsService {
       });
   }
 
-  updatePost(id: string, title: string, content: string, image: File | string) {
+  updatePost(id: string, title: string, content: string, image: File | string, latlng: [string]) {
     let postData: Post | FormData;
     if (typeof image === "object") {
       postData = new FormData();
@@ -73,12 +84,15 @@ export class PostsService {
       postData.append("title", title);
       postData.append("content", content);
       postData.append("image", image, title);
+      postData.append("latlng", latlng.toString());
     } else {
       postData = {
         id: id,
         title: title,
         content: content,
-        imagePath: image
+        imagePath: image,
+        latlng: latlng,
+        creator: null
       };
     }
     this.http
@@ -94,4 +108,5 @@ export class PostsService {
     return this.http
       .delete("http://localhost:3000/api/posts/" + postId);
   }
+
 }

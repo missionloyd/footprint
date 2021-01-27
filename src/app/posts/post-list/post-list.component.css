@@ -1,6 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
 :host {
   display: block;
-  margin-top: 1rem;
+}
+
+.body{
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-paginator-container {
+  display: flex;
+  /* border: 1px solid #4a566181; */
+}
+
+mat-paginator {
+  background-color: #FAFAFA;
 }
 
 mat-spinner {
@@ -11,14 +28,10 @@ mat-spinner {
   transform: translate(-50%, -50%);
 }
 
-mat-paginator {
-  margin-top: 1rem;
-}
 
 mat-expansion-panel {
   margin: auto;
-  margin-bottom: 1rem;
-  max-width:600px;
+  margin-bottom: 0.5rem;
 }
 
 /* ::ng-deep .mat-paginator-page-size{
@@ -29,28 +42,88 @@ mat-expansion-panel {
   display: none !important;
 } */
 
-.info-text {
-  text-align: center;
+.mat-accordion-container {
+  display: flex;
+  justify-content: center;
+  max-height: 80vh;
+  padding: 0.75rem;
+  border: 1px solid #4a566159;
+  border-radius: 4px;
+  background-color:#fed8b1;
+  overflow-y: scroll;
 }
 
-/* header */
+.info-text {
+  margin: none;
+  text-align: center;
+  padding-top: 1rem;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
 mat-expansion-panel-header {
   font-size: large;
-  font-style: italic;
+  /* font-style: italic; */
   /* text-decoration: underline; */
 }
 
 /* content */
 .post-content {
-  margin-top: 12px;
+  margin-top: 1rem;
   font-weight: bold;
 }
 
 .post-image img {
   width: 100%;
-  max-width:600px;
+  max-width: 500px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+#map {
+  display: flex;
+  flex:auto;
+  height:65vh;
+  max-height:200vh;
+  width: 130vh;
+  max-width: 150vh;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.map-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  height: 100%;
+  margin-right: 2rem;
+  border: 0.5px solid #4a566159;
+  border-radius: 4px;
+  background-color: #fed8b1;
+  margin-bottom: 1rem;
+}
+
+.map-items-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.leaflet-container .leaflet-control-mouseposition {
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 5px #bbb;
+  padding: 0 5px;
+  margin: 0;
+  color: #333;
+  font: 11px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+hr{
+  opacity: 80%;
 }

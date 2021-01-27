@@ -22,11 +22,25 @@
         rows="4"
         formControlName="content"
         placeholder="Post Content"></textarea>
-      <mat-error *ngIf="form.get('content').invalid">Please enter a post title.</mat-error>
+      <mat-error *ngIf="form.get('content').invalid">Please enter a description.</mat-error>
     </mat-form-field>
+    <div class="buttons-container">
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="onSetLocation()"
+        >Set Location
+      </button>
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <div class="location-preview">
+        <p>{{ this.locationPreview }}</p>
+    </div>
     <button
       mat-raised-button
       color="accent"
-      type="submit">Save Post</button>
+      type="submit">Save Post
+    </button>
+    </div>
   </form>
 </mat-card>

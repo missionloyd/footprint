@@ -1,7 +1,14 @@
 <mat-toolbar color = "primary">
   <span>
-    <a routerLink="/" routerLinkActive="mat-accent">Home</a>
+    <div class="logo-container">
+      <a routerLink="/" routerLinkActive="mat-accent">Footprint</a>
+      <img src="../../../assets/images/footprint-white.png" alt="image" height = '20'/>
+    </div>
   </span>
+  <span class="spacer"></span>
+  <div class="announcement-container">
+    <a id="announcement">Keep track of your trips, stay safe!</a>
+  </div>
   <span class="spacer"></span>
   <ul>
     <li *ngIf="userIsAuthenticated">

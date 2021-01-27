@@ -3,4 +3,6 @@ export interface Post {
   title: string;
   content: string;
   imagePath: string;
+  latlng: [string];
+  creator: string;
 }

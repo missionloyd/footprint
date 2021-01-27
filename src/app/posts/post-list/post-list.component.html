@@ -1,26 +1,63 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<mat-accordion multi="true" *ngIf="posts.length > 0 && !isLoading">
-  <mat-expansion-panel *ngFor="let post of posts" [expanded]="posts" hideToggle>
-    <mat-expansion-panel-header>
-      {{ post.title }}
-    </mat-expansion-panel-header>
-    <div class="post-image">
-      <img [src]="post.imagePath" [alt]="post.title">
+<div class="mat-paginator-container">
+  <mat-paginator
+    [length]="totalPosts"
+    [pageSize]="postsPerPage"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onChangedPage($event)"
+    *ngIf="posts.length > 0">
+  </mat-paginator>
+</div>
+<div class="body">
+  <div class="map-container" [style.visibility]="!isLoading ? 'visible' : 'hidden'">
+    <div id="map"></div>
+    <div class="map-menu-container">
+      <hr>
+      <p class="info-text" *ngIf="posts.length <= 0 && !isLoading">Add a post for map controls!</p>
+      <div class="map-items-container" *ngIf="posts.length > 0">
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="centerMap()"
+          >Center Map
+        </button>
+        <span class="spacer"></span>
+        <mat-slide-toggle
+          #toggleElement
+          color="primary"
+          [checked] = "checked"
+          (change)="togglePath($event)">
+          <a>Toggle Path</a>
+        </mat-slide-toggle>
+      </div>
     </div>
-    <div class="post-content">
-      <p>{{ post.content }}</p>
-    </div>
-    <mat-action-row *ngIf="userIsAuthenticated">
-      <a mat-button color="primary" [routerLink]="['/edit', post.id]">EDIT</a>
-      <button mat-button color="warn" (click)="onDelete(post.id)">DELETE</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-</mat-accordion>
-<mat-paginator
-  [length]="totalPosts"
-  [pageSize]="postsPerPage"
-  [pageSizeOptions]="pageSizeOptions"
-  (page)="onChangedPage($event)"
-  *ngIf="posts.length > 0">
-</mat-paginator>
-<p class="info-text mat-body-1" *ngIf="posts.length <= 0 && !isLoading">No posts added yet!</p>
+  </div>
+  <div class="mat-accordion-container" [style.visibility]="!isLoading ? 'visible' : 'hidden'">
+    <p class="info-text" *ngIf="posts.length <= 0 && !isLoading">No posts added yet!</p>
+    <mat-accordion multi="true" *ngIf="posts.length > 0 && !isLoading">
+      <mat-expansion-panel
+        #panelElement
+        *ngFor="let post of posts; first as isFirst"
+        [expanded]="isFirst"
+        hideToggle="true"
+        (expandedChange)="togglePopup($event,post.id)">
+        <mat-expansion-panel-header>
+          {{ post.title }}
+          <span class="spacer"></span>
+          <img src="../../../assets/images/footprint-black.png" alt="image" height = '20'/>
+        </mat-expansion-panel-header>
+        <div class="post-image">
+          <img [src]="post.imagePath" [alt]="post.title">
+        </div>
+        <div class="post-content">
+          <p>{{ post.content }}</p>
+        </div>
+        <mat-action-row *ngIf="userIsAuthenticated && userId == post.creator">
+          <a mat-button color="primary" [routerLink]="['/edit', post.id]">UPDATE</a>
+          <button mat-button color="warn" (click)="onDelete(post.id)">DELETE</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

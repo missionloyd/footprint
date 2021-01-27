@@ -18,8 +18,10 @@ export class PostCreateComponent implements OnInit {
   isLoading = false;
   form: FormGroup;
   imagePreview: string;
+  locationPreview: string;
   private mode = "create";
   private postId: string;
+  latlng: number;
 
   constructor(
     public postsService: PostsService,
@@ -27,15 +29,20 @@ export class PostCreateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
+    const now = new Date().toLocaleString();
+    this.locationPreview = "";
+
     this.form = new FormGroup({
-      title: new FormControl(null, {
+      title: new FormControl(now, {
         validators: [Validators.required, Validators.minLength(3)]
       }),
       content: new FormControl(null, { validators: [Validators.required] }),
       image: new FormControl(null, {
         validators: [Validators.required],
         asyncValidators: [mimeType]
-      })
+      }),
+      latlng: new FormControl([-1,-1], { validators: [Validators.required] })
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has("postId")) {
@@ -48,12 +55,15 @@ export class PostCreateComponent implements OnInit {
             id: postData._id,
             title: postData.title,
             content: postData.content,
-            imagePath: postData.imagePath
+            imagePath: postData.imagePath,
+            latlng: postData.latlng,
+            creator: postData.creator
           };
           this.form.setValue({
             title: this.post.title,
             content: this.post.content,
-            image: this.post.imagePath
+            image: this.post.imagePath,
+            latlng: this.post.latlng
           });
         });
       } else {
@@ -74,6 +84,26 @@ export class PostCreateComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  onSetLocation(){
+    //check for allow location
+    this.isLoading = true;
+    if (!navigator.geolocation) {
+      console.log('Error: The Geolocation service failed.');
+      this.locationPreview = 'Please Allow Geolocation Services';
+    }
+    this.locationPreview = 'Fetching Current Location...'
+    //get location
+    navigator.geolocation.getCurrentPosition((position) => {
+      const coords = position.coords;
+      this.form.value.latlng = `${position.coords.latitude}, ${position.coords.longitude}`;
+      console.log(this.form.value.latlng);
+      this.locationPreview = 'Location Recieved!';
+    },
+    () => {this.locationPreview = 'Location Not Found!';}
+    );
+    this.isLoading = false;
+  }
+
   onSavePost() {
     if (this.form.invalid) {
       return;
@@ -83,14 +113,16 @@ export class PostCreateComponent implements OnInit {
       this.postsService.addPost(
         this.form.value.title,
         this.form.value.content,
-        this.form.value.image
+        this.form.value.image,
+        this.form.value.latlng
       );
     } else {
       this.postsService.updatePost(
         this.postId,
         this.form.value.title,
         this.form.value.content,
-        this.form.value.image
+        this.form.value.image,
+        this.form.value.latlng
       );
     }
     this.form.reset();

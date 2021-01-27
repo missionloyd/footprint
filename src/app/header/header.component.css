@@ -1,3 +1,11 @@
+.announcement-container {
+  margin-left: 2rem;
+}
+#announcement {
+  font-size: 15px;
+  font-style: italic;
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -11,6 +19,12 @@ a {
 
 ul {
   display: flex;
+}
+logo-container {
+  margin: none;
+  padding: none;
+  color-adjust: white;
+
 }
 
 .spacer {
