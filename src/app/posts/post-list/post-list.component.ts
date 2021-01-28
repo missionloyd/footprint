@@ -108,7 +108,7 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
                 box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);"
               src="${c.imagePath}"/>
             </br>
-              <p>${c.content}</p>
+              <strong><p>${c.content}</p></strong>
             </center>`
             )
           this.layer.addLayer(circlemarker);
@@ -124,9 +124,12 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
           }).addTo(this.pathLayer);
           this.addFirstLayer = false;
         }
-      });
 
-      //set view of map to first coordinate in the list
+        //center map
+        if (this.coordsList[0]) {
+          this.centerMap();
+        }
+      });
 
       this.userIsAuthenticated = this.authService.getIsAuth();
       this.authStatusSub = this.authService.
@@ -152,6 +155,8 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.postsService.deletePost(postId).subscribe(() => {
       this.postsService.getPosts(this.postsPerPage, this.currentPage);
       this.MapService.getPosts();
+    }, () => {
+      this.isLoading = false;
     });
   }
 
@@ -162,7 +167,7 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private initMap() {
-    this.map = L.map('map').setView([33.4225316,-111.936926],16);
+    this.map = L.map('map').setView([39.8283, -98.5795],3);
         L.tileLayer(
           'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic3VicmF0MDA3IiwiYSI6ImNrYjNyMjJxYjBibnIyem55d2NhcTdzM2IifQ.-NnMzrAAlykYciP4RP9zYQ',
           {

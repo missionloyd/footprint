@@ -1,25 +1,26 @@
 .announcement-container {
-  margin-left: 2rem;
+  margin-left: 5rem;
 }
-#announcement {
+.announcement {
+  text-decoration: none;
   font-size: 15px;
   font-style: italic;
 }
 
 ul {
+  display: flex;
   list-style: none;
   padding: 0;
   margin: 0;
+  font-weight: bold;
 }
 
-a {
+a, button{
   text-decoration: none;
   color: white;
+  font-weight: bold;
 }
 
-ul {
-  display: flex;
-}
 logo-container {
   margin: none;
   padding: none;
@@ -30,3 +31,4 @@ logo-container {
 .spacer {
   flex: 1 1 auto;
 }
+

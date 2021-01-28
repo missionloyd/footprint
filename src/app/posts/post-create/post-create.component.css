@@ -9,8 +9,16 @@ mat-card{
   width: 40%;
 }
 
+button {
+  font-weight: bold;
+}
+
 mat-spinner {
   margin: auto;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 input[type="file"] {
@@ -34,4 +42,33 @@ input[type="file"] {
   margin-top: 0.5rem;
   display: flex;
   justify-content: space-between;
+
+}
+
+.location-status {
+  margin: none;
+  padding: none;
+}
+
+.ul-loading li{
+  list-style: none;
+  margin: none;
+  padding: none;
+  float: right;
+}
+
+.ul-loading {
+  padding: 0;
+  margin: 0;
+}
+
+.location-preview-text {
+  margin: none;
+  margin-right: 0.5rem;
+  padding: none;
+  transform: translate(0%, 40%);
+}
+
+.mat-spinner {
+  transform: translate(0%, 25%);
 }

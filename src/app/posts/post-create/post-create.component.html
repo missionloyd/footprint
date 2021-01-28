@@ -1,6 +1,6 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<mat-card>
-  <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
+<mat-card *ngIf="!isLoading">
+  <form [formGroup]="form" (submit)="onSavePost()">
     <mat-form-field>
       <input
         matInput
@@ -32,15 +32,21 @@
         (click)="onSetLocation()"
         >Set Location
       </button>
-      <mat-spinner *ngIf="isLoading"></mat-spinner>
-      <div class="location-preview">
-        <p>{{ this.locationPreview }}</p>
-    </div>
-    <button
-      mat-raised-button
-      color="accent"
-      type="submit">Save Post
-    </button>
+      <div class="location-status">
+        <ul class="ul-loading">
+          <li class="mat-spinner">
+            <mat-spinner *ngIf="isLoadingUtil" [diameter]="18"></mat-spinner>
+          </li>
+          <li>
+            <p class="location-preview-text">{{ this.locationPreview }}</p>
+          </li>
+        </ul>
+      </div>
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit">Save Post
+      </button>
     </div>
   </form>
 </mat-card>

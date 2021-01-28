@@ -1,40 +1,46 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 
 import { PostsService } from "../posts.service";
 import { Post } from "../post.model";
 import { mimeType } from "./mime-type.validator";
+import { Subscription } from "rxjs";
+import { AuthService } from "src/app/auth/auth.service";
 
 @Component({
   selector: "app-post-create",
   templateUrl: "./post-create.component.html",
   styleUrls: ["./post-create.component.css"]
 })
-export class PostCreateComponent implements OnInit {
+export class PostCreateComponent implements OnInit, OnDestroy {
   enteredTitle = "";
   enteredContent = "";
   post: Post;
   isLoading = false;
+  isLoadingUtil = false;
   form: FormGroup;
+  latlng: number;
   imagePreview: string;
   locationPreview: string;
   private mode = "create";
   private postId: string;
-  latlng: number;
+  private authStatusSub: Subscription;
 
   constructor(
     public postsService: PostsService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
-
-    const now = new Date().toLocaleString();
-    this.locationPreview = "";
-
+    this.authStatusSub = this.authService
+      .getAuthStatusListener()
+      .subscribe(authStatus => {
+        this.isLoading = false;
+      });
     this.form = new FormGroup({
-      title: new FormControl(now, {
+      title: new FormControl((new Date().toLocaleString()), {
         validators: [Validators.required, Validators.minLength(3)]
       }),
       content: new FormControl(null, { validators: [Validators.required] }),
@@ -42,7 +48,7 @@ export class PostCreateComponent implements OnInit {
         validators: [Validators.required],
         asyncValidators: [mimeType]
       }),
-      latlng: new FormControl([-1,-1], { validators: [Validators.required] })
+      latlng: new FormControl(null, { validators: [Validators.required] })
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has("postId")) {
@@ -71,6 +77,7 @@ export class PostCreateComponent implements OnInit {
         this.postId = null;
       }
     });
+    this.locationPreview = "*All fields are required"
   }
 
   onImagePicked(event: Event) {
@@ -86,22 +93,25 @@ export class PostCreateComponent implements OnInit {
 
   onSetLocation(){
     //check for allow location
-    this.isLoading = true;
+    this.isLoadingUtil = true;
     if (!navigator.geolocation) {
+      this.isLoadingUtil = false;
       console.log('Error: The Geolocation service failed.');
       this.locationPreview = 'Please Allow Geolocation Services';
     }
-    this.locationPreview = 'Fetching Current Location...'
+    this.locationPreview = 'Fetching Current Location... '
     //get location
     navigator.geolocation.getCurrentPosition((position) => {
+      this.isLoadingUtil = false;
       const coords = position.coords;
-      this.form.value.latlng = `${position.coords.latitude}, ${position.coords.longitude}`;
+      // this.form.value.latlng = `${position.coords.latitude}, ${position.coords.longitude}`;
+      this.form.controls.latlng.setValue(`${position.coords.latitude}, ${position.coords.longitude}`);
       console.log(this.form.value.latlng);
       this.locationPreview = 'Location Recieved!';
     },
     () => {this.locationPreview = 'Location Not Found!';}
     );
-    this.isLoading = false;
+    return this.form.value.latng;
   }
 
   onSavePost() {
@@ -126,5 +136,9 @@ export class PostCreateComponent implements OnInit {
       );
     }
     this.form.reset();
+  }
+
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
   }
 }
