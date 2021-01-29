@@ -37,10 +37,10 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
   userId: string;
   mousePosition:any;
 
-  private latlng;
-  private coords;
+  private latlng:any;
+  private coords:any;
   private incrementor = 0;
-  private coordsList;
+  private coordsList:any;
 
   private postsSub: Subscription;
   private mapSub: Subscription;
@@ -150,7 +150,13 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
   onDelete(postId: string) {
     this.isLoading = true;
     this.map.removeLayer(this.layer);
-    this.map.removeLayer(this.pathLayer);
+
+    //remove path if there are multiple posts
+    if (this.coordsList[1]) {
+      this.map.removeLayer(this.pathLayer);
+    }
+
+    //refresh posts
     this.layer = L.layerGroup().addTo(this.map);
     this.postsService.deletePost(postId).subscribe(() => {
       this.postsService.getPosts(this.postsPerPage, this.currentPage);

@@ -41,7 +41,7 @@ mat-expansion-panel {
   justify-content: center;
   max-height: 79vh;
   padding: 0.75rem;
-  border: 1px solid #4a566159;
+  border: 1px solid #CCC;
   border-radius: 4px;
   background-color:#B3E5FC;
   overflow-y: scroll;
@@ -106,7 +106,7 @@ mat-expansion-panel-header {
   flex-direction: column;
   padding: 0.75rem;
   margin-right: 2rem;
-  border: 0.5px solid #4a566159;
+  border: 0.5px solid #CCC;
   border-radius: 4px;
   background-color: #B3E5FC;
   margin-bottom: 1rem;
@@ -132,8 +132,16 @@ mat-expansion-panel-header {
 
 hr{
   opacity: 80%;
+  border: 0;
+  height: 1px;
+  background: #4a566159;
+  background-image: linear-gradient(to right, #ccc, rgba(51, 51, 51, 0.3), #ccc);
 }
 
 button {
   font-weight: bold;
+}
+
+.mat-slide-toggle {
+  margin-top: 0.5rem;
 }

@@ -27,6 +27,10 @@ mat-card {
   transform: translate(-50%, -50%);
 }
 
+mat-card-header{
+  text-align: left;
+}
+
 mat-form-field {
   width: 100%;
 }

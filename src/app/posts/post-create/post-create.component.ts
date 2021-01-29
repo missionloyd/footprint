@@ -100,11 +100,13 @@ export class PostCreateComponent implements OnInit, OnDestroy {
       this.locationPreview = 'Please Allow Geolocation Services';
     }
     this.locationPreview = 'Fetching Current Location... '
+
     //get location
     navigator.geolocation.getCurrentPosition((position) => {
       this.isLoadingUtil = false;
       const coords = position.coords;
-      // this.form.value.latlng = `${position.coords.latitude}, ${position.coords.longitude}`;
+
+      //set form value latlng
       this.form.controls.latlng.setValue(`${position.coords.latitude}, ${position.coords.longitude}`);
       console.log(this.form.value.latlng);
       this.locationPreview = 'Location Recieved!';
