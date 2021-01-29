@@ -1,17 +1,15 @@
-<mat-spinner *ngIf="isLoading"></mat-spinner>
-<header class="video-header container">
-  <div class="fullscreen-video-wrap">
-    <video
-      src="../../../assets/videos/earth.mp4"
-      autoplay="true"
-      loop="true">
-    </video>
+<header class="signupcontainer">
+  <div class="fullscreen-background-wrap">
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
   </div>
-  <div class="header-content">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <div class="content">
     <mat-card *ngIf="!isLoading">
       <mat-card-header>
         <div mat-card-avatar class="header-image">
-          <img src="../../../assets/images/empty-profile.webp" alt="image" width = '43' height = '43'/>
+          <img src="/assets/images/empty-profile.webp" alt="image" width = '43' height = '43'/>
         </div>
         <mat-card-title>Sign Up</mat-card-title>
         <mat-card-subtitle>Secure</mat-card-subtitle>

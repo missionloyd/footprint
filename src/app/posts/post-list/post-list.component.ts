@@ -32,7 +32,7 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
   totalPosts = 0;
   postsPerPage = 3;
   currentPage = 1;
-  pageSizeOptions = [1,2,5,8,10];
+  pageSizeOptions = [1,3,5,8,10];
   userIsAuthenticated = false;
   userId: string;
   mousePosition:any;

@@ -24,7 +24,7 @@ mat-paginator {
 mat-spinner {
   margin: auto;
   position: fixed;
-  top: 45%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -43,7 +43,7 @@ mat-expansion-panel {
   padding: 0.75rem;
   border: 1px solid #4a566159;
   border-radius: 4px;
-  background-color:#fed8b1;
+  background-color:#B3E5FC;
   overflow-y: scroll;
 }
 
@@ -108,7 +108,7 @@ mat-expansion-panel-header {
   margin-right: 2rem;
   border: 0.5px solid #4a566159;
   border-radius: 4px;
-  background-color: #fed8b1;
+  background-color: #B3E5FC;
   margin-bottom: 1rem;
 }
 

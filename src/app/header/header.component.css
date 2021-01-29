@@ -1,5 +1,9 @@
 .announcement-container {
-  margin-left: 5rem;
+  position: fixed;
+  margin-top: 1rem;
+  left: 50%;
+  top: 0%;
+  transform: translate(-50%, 0%);
 }
 .announcement {
   text-decoration: none;

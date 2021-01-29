@@ -16,7 +16,7 @@ button {
 mat-spinner {
   margin: auto;
   position: fixed;
-  top: 45%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -70,5 +70,5 @@ input[type="file"] {
 }
 
 .mat-spinner {
-  transform: translate(0%, 25%);
+  transform: translate(0%, 50%);
 }
