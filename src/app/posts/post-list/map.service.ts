@@ -13,6 +13,7 @@ export class MapService {
 
     constructor(private http: HttpClient) {}
 
+    //get all posts (will change to be able to query)
     getPosts() {
       this.http
         .get<{ message: string; posts: any }>("http://localhost:3000/api/posts")

@@ -1,27 +1,70 @@
-# footprint
+# Footprint
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
+Connect your physical footprint to your digital footprint! A simple safety/social media app that utilizes 
+the Geolocation API in your browser to fetch your current location and post it on a Leaflet map and feed
+along with a picture and description for friends to view. Footprint is MEAN stack application 
+generated with MongoDB CLI, Express, Angular CLI, and Node.js.
 
-## Development server
+## Motivation
+The creation of Footprint was inspired by the idea of keeping documentation of a user's location 
+in case of an emergency. This way, friends can report to missing person services the last known
+location of a missing user. Officials will find extremely useful details including the coordinates,
+descriptions, pictures, and dates of a person if they went missing while using this app during a short walk 
+or a long trip out of the country.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Installation
+```
+npm install @angular/cli
+```
+```
+npm install express
+```
+```
+npm install nodemon
+```
 
-## Code scaffolding
+## Running Locally
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
+Run `npm run start:server` in a separate terminal to connect to the database.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Chrome seems to run this app better than other browsers.
 
-## Build
+## Preview
+<img src="/assets/images/preview.png">
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Notable Features
+- Authentication/Authorization Services
+- Password encryption
+- Scrollable Feed
+- Upload jpg or png (validation)
+- Connects to Geolocation API
+- Pagination
+- Leaflet Map with Antpath and Circlemarkers
+- Map controls
+- RESTful API
+- Error handling
 
-## Running unit tests
+## Bugs
+Refreshing your browser while viewing the feed clashes with the authentication service
+and therefore hides the edit and delete buttons on each post even though you are still
+recognized as logged in. You have to logout and login to view these buttons again.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Next Steps
+- Refactor code for mobile
+- Implement "Take picture" button instead of "Choose File"
+- Create an "Add friends" page
+- Modify backend to only GET your posts and friends' posts
 
-## Running end-to-end tests
+### Misc.
+The bulk of the feed/map component code is located in the post-list folder.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Credits
+- Luke Macy
+  - https://github.com/missionloyd
 
-## Further help
+### Additional Resources
+#### Leaflet
+- https://github.com/Leaflet/Leaflet
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+#### AntPath
+- https://github.com/rubenspgcavalcante/leaflet-ant-path

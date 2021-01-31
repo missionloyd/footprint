@@ -80,6 +80,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
     this.locationPreview = "*All fields are required"
   }
 
+  //pick image file, will add an option for taking a picture
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.form.patchValue({ image: file });

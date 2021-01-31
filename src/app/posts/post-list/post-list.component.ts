@@ -32,7 +32,7 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
   totalPosts = 0;
   postsPerPage = 3;
   currentPage = 1;
-  pageSizeOptions = [1,3,5,8,10];
+  pageSizeOptions = [1,3,5,10,20];
   userIsAuthenticated = false;
   userId: string;
   mousePosition:any;
@@ -53,8 +53,11 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    //set intitial variables
     this.isLoading = true;
     this.checked = true;
+
+    //get posts for feed
     this.postsService.getPosts(this.postsPerPage, this.currentPage);
     this.userId = this.authService.getUserId();
     this.postsSub = this.postsService.getPostUpdateListener()
@@ -64,6 +67,7 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.posts = postData.posts;
       });
 
+    //check auth
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStatusSub = this.authService.
       getAuthStatusListener()
@@ -74,6 +78,7 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(){
+    //initialize map and get all posts (will change)
     this.initMap();
     this.MapService.getPosts();
     this.userId = this.authService.getUserId();
@@ -85,17 +90,19 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
         for(const c of mapPosts) {
           //convert latlng to array of numbers
           this.latlng = c.latlng[0].toString().match(/[-+]?[0-9]*\.?[0-9]+/g);
+          //coords is used for circle marker
           this.coords = [Number(this.latlng[0]), Number(this.latlng[1])];
           const shorterCoords = "Latlng: " + (Number(this.latlng[0]).toFixed(4) + " " + Number(this.latlng[1]).toFixed(4));
+          //coords list is used for antPath
           this.coordsList[this.incrementor] = this.coords;
           this.incrementor += 1;
 
-          //add circle marker
+          //add circle marker with post content
           const circlemarker = new L.CircleMarker(this.coords, {
             color: "#2196f3"
           });
           circlemarker.bindPopup(
-            `<center>
+            `<center style="width: 175px;">
             <p>
               ${c.title}
             </p>
@@ -120,17 +127,19 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
           antPath(this.coordsList,
             {color: '#1976d2',
             weight: 10,
-            opacity: 0.6
+            opacity: 0.6,
+            delay: 700
           }).addTo(this.pathLayer);
           this.addFirstLayer = false;
         }
 
-        //center map
+        //center map if coords exist
         if (this.coordsList[0]) {
           this.centerMap();
         }
       });
 
+      //check auth
       this.userIsAuthenticated = this.authService.getIsAuth();
       this.authStatusSub = this.authService.
         getAuthStatusListener()
@@ -140,6 +149,7 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
+  //get posts based on paginator
   onChangedPage(pageData: PageEvent) {
     this.isLoading = true;
     this.currentPage = pageData.pageIndex + 1;
@@ -147,6 +157,7 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.postsService.getPosts(this.postsPerPage, this.currentPage);
   }
 
+  //update components for a deleted post
   onDelete(postId: string) {
     this.isLoading = true;
     this.map.removeLayer(this.layer);
@@ -172,6 +183,7 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.authStatusSub.unsubscribe();
   }
 
+  //map component
   private initMap() {
     this.map = L.map('map').setView([39.8283, -98.5795],3);
         L.tileLayer(
@@ -199,8 +211,9 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
     ).addTo(this.map);
   }
 
+  //center map based on first coord (could be changed to fitBounds)
   centerMap() {
-    this.map.setView(this.coordsList[0], 16);
+    this.map.setView(this.coordsList[0], 15);
   }
 
   //mat expansion panel is expanded
@@ -234,6 +247,7 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  //toggle path switch is active
   togglePath($event: MatSlideToggleChange) {
     //remove initial layer
     if(this.addFirstLayer == false){
@@ -245,7 +259,8 @@ export class PostListComponent implements OnInit, AfterViewInit, OnDestroy {
       antPath(this.coordsList,
         {color: '#1976d2',
         weight: 10,
-        opacity: 0.6
+        opacity: 0.6,
+        delay: 700
       }).addTo(this.pathLayer);
     } else {
       this.map.removeLayer(this.pathLayer);

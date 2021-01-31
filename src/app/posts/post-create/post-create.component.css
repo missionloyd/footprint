@@ -3,10 +3,20 @@ textarea {
   width: 100%;
 }
 
+.fullscreen-background-wrap {
+  position: fixed;
+  overflow: hidden;
+}
+
+.content {
+  z-index: 1;
+}
+
 mat-card{
   margin: auto;
-  margin-top: 2rem;
+  margin-top: 56px;
   width: 40%;
+  opacity: 99%;
 }
 
 button {
@@ -71,4 +81,30 @@ input[type="file"] {
 
 .mat-spinner {
   transform: translate(0%, 50%);
+}
+
+.background {
+  /* background: linear-gradient(-45deg, #6c3, #09f); */
+  background: linear-gradient(-45deg, #ee7752, #FF5722, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  bottom:0;
+  left:-50%;
+  opacity:.5;
+  position:fixed;
+  right:-50%;
+  top:64px;
+  z-index: -1;
+}
+
+@keyframes gradient {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
 }

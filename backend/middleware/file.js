@@ -6,7 +6,7 @@ const MIME_TYPE_MAP = {
   "image/jpg": "jpg"
 };
 
-//saves uploaded images
+//saves uploaded images to folder
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const isValid = MIME_TYPE_MAP[file.mimetype];
