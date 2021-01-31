@@ -25,12 +25,13 @@ npm install nodemon
 
 ## Running Locally
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
+
 Run `npm run start:server` in a separate terminal to connect to the database.
 
 Chrome seems to run this app better than other browsers.
 
 ## Preview
-<img src="/assets/images/preview.png">
+![alt text](src/assets/images/preview.png?raw=true "Preview")
 
 ## Notable Features
 - Authentication/Authorization Services
