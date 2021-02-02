@@ -16,10 +16,10 @@ or a long trip out of the country.
 - Live: http://footprint-mean.s3-website.us-east-2.amazonaws.com/
 
   - Read only login ~ email: demo@demo.com, pwd: demo
-    - (or create your own!)
+  - (or create your own!)
 
   - Read and write login ~ email: test@test.com, pwd: test  
-    - (modify cluster data for everyone, only use to verify functionality)
+  - (modify cluster data for everyone, only use to verify functionality)
 
 - REST api: http://footprint-env.eba-m2w5qfkx.us-east-2.elasticbeanstalk.com/api/posts
 
@@ -46,7 +46,7 @@ Run `npm run start:server` in a separate terminal to connect to the database.
 
 Chrome seems to run this app better than other browsers.
 
-# If connecting to the database fails...
+### If connecting to the database fails...
 You will either have to create your own cluster on MongoDB and modify backend/app.js 
 or email me and I can add your IP address! The issue here is that 
 even though I whitelisted all IP addresses, there must be some unspoken secruity issue 
