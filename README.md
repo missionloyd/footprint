@@ -33,13 +33,6 @@ Run `npm run start:server` in a separate terminal to connect to the database.
 
 Chrome seems to run this app better than other browsers.
 
-## Demo Login
-Login with the following credentials to modify the demo data:
-
-Email: `test@test.com`
-
-Password: `test`
-
 ## Preview
 ![alt text](src/assets/images/preview.png?raw=true "Preview")
 
