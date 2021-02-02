@@ -16,25 +16,17 @@ or a long trip out of the country.
 - Live: http://footprint-mean.s3-website.us-east-2.amazonaws.com/
 
   - Read only login ~ email: demo@demo.com, pwd: demo
-  - (or create your own!)
+    - (or create your own!)
 
   - Read and write login ~ email: test@test.com, pwd: test  
-  - (modify cluster data for everyone, only use to verify functionality)
+    - (modify cluster data for everyone, only use to verify functionality)
 
 - REST api: http://footprint-env.eba-m2w5qfkx.us-east-2.elasticbeanstalk.com/api/posts
 
 ## Local Installation
 - node v15.4.0
 - npm v7.0.15
-```
-npm install @angular/cli
-```
-```
-npm install express
-```
-```
-npm install nodemon
-```
+
 ```
 npm install
 ```
@@ -51,6 +43,8 @@ You will either have to create your own cluster on MongoDB and modify backend/ap
 or email me and I can add your IP address! The issue here is that 
 even though I whitelisted all IP addresses, there must be some unspoken secruity issue 
 preventing you from connecting - still working on this issue!
+
+ - "mongodb+srv://<username>:<password>@footprint0.yputw.mongodb.net/footprint?retryWrites=true&w=majority"
 
 ## Preview
 ![alt text](src/assets/images/preview.png?raw=true "Preview")
