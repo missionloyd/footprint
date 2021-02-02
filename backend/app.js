@@ -10,7 +10,11 @@ const userRoutes = require("./routes/user");
 const app = express();
 
 mongoose
-.connect("mongodb+srv://luke:Pt9Y99GNKzYhYFNW@footprint0.yputw.mongodb.net/footprint?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true })
+.connect("mongodb+srv://" +process.env.MONGO_ATLAS_USERNAME + ":" +
+            process.env.MONGO_ATLAS_PW +
+            //*** edit for new cluster ***
+            "@footprint0.yputw.mongodb.net/footprint",
+            { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("Connected to database!");
   })
@@ -18,7 +22,6 @@ mongoose
     console.log("Connection failed!");
   });
 
-//deprecation warning
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 

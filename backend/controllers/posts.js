@@ -42,12 +42,13 @@ exports.updatePost = (req, res, next) => {
     latlng: req.body.latlng,
     creator: req.userData.userId
   });
-  Post.updateOne({ _id: req.params.id, creator: req.userData.userId }, post).then(result => {
-    if (result.n > 0) {
-      res.status(200).json({ message: "Update successful!" });
-    } else {
-      res.status(401).json({ message: "Not authorized!" });
-    }
+  Post.updateOne({ _id: req.params.id, creator: req.userData.userId }, post)
+    .then(result => {
+      if (result.n > 0) {
+        res.status(200).json({ message: "Update successful!" });
+      } else {
+        res.status(401).json({ message: "Not authorized!" });
+      }
   })
   .catch(error => {
     res.status(500).json({

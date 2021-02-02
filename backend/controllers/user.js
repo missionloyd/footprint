@@ -50,7 +50,7 @@ exports.userLogin = (req, res, next) => {
       //json web token for users
       const token = jwt.sign(
         { email: fetchedUser.email, userId: fetchedUser._id },
-        "secret_development_string",
+        process.env.JWT_KEY,
         // expires in 1 hour
         { expiresIn: "1h" }
       );

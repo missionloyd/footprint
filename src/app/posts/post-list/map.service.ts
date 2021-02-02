@@ -3,7 +3,10 @@ import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { map } from "rxjs/operators";
 
+import { environment } from "../../../environments/environment";
 import { Post } from "../post.model";
+
+const BACKEND_URL = environment.apiUrl + "/posts/";
 
 @Injectable({ providedIn: "root" })
 export class MapService {
@@ -16,7 +19,7 @@ export class MapService {
     //get all posts (will change to be able to query)
     getPosts() {
       this.http
-        .get<{ message: string; posts: any }>("http://localhost:3000/api/posts")
+        .get<{ message: string; posts: any }>(BACKEND_URL)
         .pipe(
           map(postData => {
             return postData.posts.map(post => {
