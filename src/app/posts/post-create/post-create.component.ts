@@ -112,7 +112,10 @@ export class PostCreateComponent implements OnInit, OnDestroy {
       console.log(this.form.value.latlng);
       this.locationPreview = 'Location Recieved!';
     },
-    () => {this.locationPreview = 'Location Not Found!';}
+    () => {
+      this.locationPreview = 'Location Not Found!';
+      this.form.controls.latlng.setValue(`${-1}, ${-1}`);
+    }
     );
     return this.form.value.latng;
   }

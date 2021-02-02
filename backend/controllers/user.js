@@ -1,5 +1,5 @@
 //middleware for routing functions
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
@@ -50,7 +50,7 @@ exports.userLogin = (req, res, next) => {
       //json web token for users
       const token = jwt.sign(
         { email: fetchedUser.email, userId: fetchedUser._id },
-        process.env.JWT_KEY,
+        "secret_development_string",
         // expires in 1 hour
         { expiresIn: "1h" }
       );

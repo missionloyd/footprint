@@ -14,7 +14,9 @@ const storage = multer.diskStorage({
     if (isValid) {
       error = null;
     }
-    cb(error, "backend/images");
+    cb(error, "images");
+    //Root is a global object that changes the image folder in dev or prod
+    //cb(error, process.env.ROOT ? process.env.ROOT + "images" : "images");
   },
   filename: (req, file, cb) => {
     const name = file.originalname

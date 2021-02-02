@@ -81,7 +81,7 @@ exports.getPostsPerPage = (req, res, next) => {
   })
   .catch(error => {
     res.status(500).json({
-      message: "Failed to fetch posts!"
+      message: "Failed to fetch posts per page!"
     });
   });
 }
@@ -95,7 +95,7 @@ exports.getPosts = (req, res, next) => {
     });
   }).catch(error => {
     res.status(500).json({
-      message: "Failed to fetch posts!"
+      message: "Failed to fetch all posts!"
     });
   });
 }
@@ -110,7 +110,7 @@ exports.getPost = (req, res, next) => {
     }
   }).catch(error => {
     res.status(500).json({
-      message: "Failed to fetch posts!"
+      message: "Failed to fetch one post!"
     });
   });
 }
@@ -125,7 +125,7 @@ exports.deletePost = (req, res, next) => {
     }
   }).catch(error => {
     res.status(500).json({
-      message: "Failed to fetch posts!"
+      message: "Failed to delete post!"
     });
   });
 }
